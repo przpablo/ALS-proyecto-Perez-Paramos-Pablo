@@ -26,4 +26,6 @@ class Conductor(Usuario):
     def carnet(self, carnet):
         self.__carnet = carnet
 
-    
+    def publica(self, origen, destino, fecha, hora, tiempo, tarifa, plazas):
+        from viaje import Viaje
+        return Viaje(origen, destino, fecha, hora, tiempo, tarifa, plazas, self)

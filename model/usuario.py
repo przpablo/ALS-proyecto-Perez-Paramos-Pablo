@@ -29,32 +29,30 @@ class Usuario(flask_login.UserMixin):
         self.__telefono = telefono
 
     @property
-    def oids_valoraciones(self):
-        if not self.__dict__.get("_valoraciones"):
-            self.__valoraciones = []
-        return self.__valoraciones
+    def valoraciones(self):
+        return list(self.__valoraciones)
 
     @property
     def email(self):
-        return self._email
+        return self.__email
 
     def get_id(self):
         return self.email
 
     def chk_password(self, pswd):
-        return safe.check_password_hash(self._password, pswd)
+        return safe.check_password_hash(self.__passwd, pswd)
 
-    def add_valoracion_oid(self, valoracion_oid):
-        self.oids_valoraciones.append(valoracion_oid)
+    def add_valoracion(self, valoracion: int):
+        self.__valoraciones.append(valoracion)
 
     def calcular_valoracion(self):
-        toret = 0
-        if len(self.oids_valoraciones) == 0:
-            toret = 0
+        toret = 0.0
+        if len(self.valoraciones) == 0:
+            toret = 0.0
         else:
-            for valoracion in self.oids_valoraciones:
+            for valoracion in self.valoraciones:
                 toret += valoracion
-            toret /= len(self.oids_valoraciones)
+            toret /= len(self.valoraciones)
         return toret
 
     @staticmethod

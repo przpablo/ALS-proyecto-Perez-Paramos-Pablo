@@ -38,3 +38,6 @@ class Coche:
     @anno.setter
     def anno(self, anno):
         self.__anno = anno
+
+    def __str__(self):
+        return f"{self.marca}, {self.modelo} ({self.anno}): {self.color}"

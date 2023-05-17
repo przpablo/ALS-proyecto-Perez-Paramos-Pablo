@@ -4,8 +4,7 @@ from conductor import Conductor
 
 
 class Viaje:
-    def __init__(self, id_viaje, origen, destino, fecha, hora, tiempo, tarifa, plazas, conductor: Conductor):
-        self.__id_viaje = id_viaje
+    def __init__(self, origen, destino, fecha, hora, tiempo, tarifa, plazas, conductor: Conductor):
         self.__origen = origen
         self.__destino = destino
         self.__fecha = fecha
@@ -14,10 +13,7 @@ class Viaje:
         self.__tarifa = tarifa
         self.__plazas = plazas
         self.__condutor = conductor
-
-    @property
-    def id_viaje(self):
-        return self.__id_viaje
+        self.__pasajeros = []
 
     @property
     def origen(self):
@@ -79,3 +75,23 @@ class Viaje:
     def conductor(self):
         return self.__condutor
 
+    @property
+    def pasajeros(self):
+        return list(self.__pasajeros)
+
+    def add_pasajero(self, pasajero):
+        if self.plazas > 0:
+            self.__pasajeros.append(pasajero)
+            self.__plazas -= 1
+        else:
+            raise Exception("No hay plazas disponibles")
+
+    def add_pasajeros(self, pasajeros: list):
+        if self.plazas >= len(pasajeros):
+            self.__pasajeros.extend(pasajeros)
+            self.__plazas -= len(pasajeros)
+        else:
+            raise Exception("No hay plazas disponibles")
+
+    def __str__(self):
+        return f"{self.origen} - {self.destino} ({self.fecha} {self.hora}): {self.tarifa}€ por: {self.conductor.nombre}"
