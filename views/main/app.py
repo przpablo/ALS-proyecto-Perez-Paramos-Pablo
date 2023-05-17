@@ -10,7 +10,7 @@ def create_app():
     fapp = flask.Flask(__name__)
     syrp = sirope.Sirope()
 
-    fapp.config.from_file("config.json", load=json.load)
+    fapp.config.from_file("../../instance/config.json", load=json.load)
     lmanager.init_app(fapp)
     return fapp, lmanager, syrp
 
@@ -20,7 +20,7 @@ app, lm, srp = create_app()
 
 @lm.user_loader
 def user_loader(email):
-    return Usuario.find(srp, email)
+   return Usuario.find(srp, email)
 
 
 @lm.unauthorized_handler
