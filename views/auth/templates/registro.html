@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-custom" style="background-color: #28a745;">
+                    <h3 class="card-title text-white">Registro</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" placeholder="Ingrese su nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Ingrese su teléfono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success btn-registrarse">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center bg-custom text-white" style="background-color: #28a745;">
+                    ¿Ya tienes una cuenta? <a href="/" class="text-white">Iniciar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .card-header {
+        background-color: #28a745;
+    }
+
+    .card-title {
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    .card-footer {
+        background-color: #28a745;
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .bg-custom {
+        background-color: #28a745;
+    }
+</style>
