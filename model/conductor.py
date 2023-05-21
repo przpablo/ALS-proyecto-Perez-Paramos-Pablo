@@ -1,7 +1,7 @@
 # Conductor
 
-from coche import Coche
-from usuario import Usuario
+from model.coche import Coche
+from model.usuario import Usuario
 
 
 class Conductor(Usuario):

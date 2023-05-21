@@ -68,6 +68,10 @@ class Usuario(flask_login.UserMixin):
     def find(s: sirope.Sirope, email: str) -> "Usuario":
         return s.find_first(Usuario, lambda u: u.email == email)
 
+    def publica(self, origen, destino, fecha, hora, tiempo, tarifa, plazas):
+        from viaje import Viaje
+        return Viaje(origen, destino, fecha, hora, tiempo, tarifa, plazas, self)
+
     # Pablo Perez (6934982394) pablo.perez@gmail: 5.0
     def __str__(self):
         return f"{self.nombre} ({self.telefono}) {self.email}: {self.calcular_valoracion()}"

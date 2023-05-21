@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-custom" style="background-color: #28a745;">
+                    <h3 class="card-title text-white">Registro de Viaje</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="origen" class="form-label">Origen</label>
+                            <input type="text" class="form-control" id="origen" name="origen" placeholder="Ingrese el origen">
+                        </div>
+                        <div class="mb-3">
+                            <label for="destino" class="form-label">Destino</label>
+                            <input type="text" class="form-control" id="destino" name="destino" placeholder="Ingrese el destino">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha">
+                        </div>
+                        <div class="mb-3">
+                            <label for="hora" class="form-label">Hora</label>
+                            <input type="time" class="form-control" id="hora" name="hora">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tiempo" class="form-label">Tiempo</label>
+                            <input type="text" class="form-control" id="tiempo" name="tiempo" placeholder="Ingrese el tiempo estimado">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tarifa" class="form-label">Tarifa</label>
+                            <input type="text" class="form-control" id="tarifa" name="tarifa" placeholder="Ingrese la tarifa">
+                        </div>
+                        <div class="mb-3">
+                            <label for="plazas" class="form-label">Plazas disponibles</label>
+                            <input type="number" class="form-control" id="plazas" name="plazas" placeholder="Ingrese la cantidad de plazas disponibles">
+                        </div>
+                        <div class="mb-3">
+                            <label for="coche" class="form-label">Coche</label>
+                            <input type="text" class="form-control" id="coche" name="coche" placeholder="Ingrese los datos del coche">
+                        </div>
+                        <div id="dvErrores" style="color: red;background-color: white">
+                            <ul>
+                            {% for msg in get_flashed_messages()%}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success btn-registrarse">Registrar Viaje</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
