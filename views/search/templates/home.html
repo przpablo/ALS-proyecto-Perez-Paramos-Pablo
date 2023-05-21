@@ -2,10 +2,6 @@
 
 {% block content %}
 <div class="container">
-    <div class="text-left mt-4">
-        <a href="{{ url_for('publicar.publicar_route') }}" class="btn btn-success">Publicar Viaje</a>
-    </div>
-
     <div class="accordion" id="viajesAccordion">
         {% if lista_viajes %}
             {% for viaje in lista_viajes %}

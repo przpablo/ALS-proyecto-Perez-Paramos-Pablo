@@ -1,5 +1,6 @@
 import flask
 from flask import render_template
+from flask_login import login_required
 import sirope
 
 
@@ -14,10 +15,12 @@ home_blueprint, publicar_blueprint, srp = get_blprint()
 
 
 @home_blueprint.route('/home', methods=['GET'])
+@login_required
 def home_route():
     return render_template('home.html')
 
 
 @publicar_blueprint.route('/publicar', methods=['GET', 'POST'])
+@login_required
 def publicar_route():
     return render_template('publicar.html')
