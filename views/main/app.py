@@ -2,7 +2,7 @@ import os
 import flask
 import sirope
 import flask_login
-from flask import Flask, render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request
 from flask_login import login_manager
 from views.auth.auth import auth_blueprint
 from views.search.home import home_blueprint
@@ -15,6 +15,7 @@ def create_app():
     syrp = sirope.Sirope()
 
     # aplicacion.config.from_json("config.json")
+    aplicacion.secret_key = "1e44b3a45067431da85bfe4259f5a15e"
     lmanager.init_app(aplicacion)
     aplicacion.register_blueprint(auth_blueprint, url_prefix='/auth')
     aplicacion.register_blueprint(home_blueprint, url_prefix='/home')
@@ -43,6 +44,7 @@ def unauthorized_handler():
     return flask.redirect("/")
 
 
+# IGUAL PUEDO ELIMINARLO
 def guardar_usuario(user):
     srp.save(user)
 
@@ -51,9 +53,26 @@ def guardar_usuario(user):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # Aquí se realizaría la lógica de autenticación
-        # Si la autenticación es exitosa, redirigir a la página home
-        return redirect(url_for('home.home_route'))
+        email = request.form['email']
+        password = request.form['password']
+
+        if not email:
+            flask.flash("El email está vacío")
+            return flask.redirect("/")
+        else:
+            user = Usuario.find(srp, email)
+            if not password:
+                flask.flash("El password está vacío")
+                return flask.redirect("/")
+            elif not user:
+                flask.flash("El usuario no existe")
+                return flask.redirect("/")
+            elif not user.chk_password(password):
+                flask.flash("El password es incorrecto")
+                return flask.redirect("/")
+
+            flask_login.login_user(user)
+            return redirect(url_for('home.home_route'))
 
     return render_template('index.html')
 
