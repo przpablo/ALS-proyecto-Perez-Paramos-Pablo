@@ -1,6 +1,9 @@
 import flask
-from flask import render_template
+from flask import render_template, request
 from flask_login import login_required
+from model.viaje import Viaje
+from datetime import date, datetime
+from model.usuario import Usuario
 import sirope
 
 
@@ -23,4 +26,48 @@ def home_route():
 @publicar_blueprint.route('/publicar', methods=['GET', 'POST'])
 @login_required
 def publicar_route():
+    if request.method == "POST":
+        origen = request.form['origen']
+        destino = request.form['destino']
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        tiempo = request.form['tiempo']
+        tarifa = request.form['tarifa']
+        plazas = request.form['plazas']
+        coche = request.form['coche']
+
+        if not origen or not origen.isalpha():
+            flask.flash("Formato origen no válido")
+            return flask.redirect("/publicar/publicar")
+        if not destino or not destino.isalpha():
+            flask.flash("Formato destino no válido")
+            return flask.redirect("/publicar/publicar")
+        if not fecha or datetime.strptime(fecha, "%Y-%m-%d").date() < date.today():
+            flask.flash("Formato fecha no válido")
+            return flask.redirect("/publicar/publicar")
+        if not hora:
+            flask.flash("La hora está vacía")
+            return flask.redirect("/publicar/publicar")
+        if not tiempo:
+            flask.flash("El tiempo está vacío")
+            return flask.redirect("/publicar/publicar")
+        if not tarifa:
+            flask.flash("Formato tarifa no válido")
+            return flask.redirect("/publicar/publicar")
+        if not plazas:
+            flask.flash("Formato plazas no válido")
+            return flask.redirect("/publicar/publicar")
+        if not coche:
+            flask.flash("El coche está vacío")
+            return flask.redirect("/publicar/publicar")
+        else:
+            viaje = Viaje(origen, destino, fecha, hora, tiempo, tarifa, plazas, Usuario.current_user())
+            srp.save(viaje)
+
+            lista_viajes = srp.load_all(Viaje)
+            datos = {
+                "lista_viajes": reversed(list(lista_viajes))
+            }
+            return flask.redirect("/home/home", **datos)
+
     return render_template('publicar.html')

@@ -5,6 +5,7 @@ from flask import render_template, request
 from flask_login import login_manager
 from views.auth.auth import auth_blueprint
 from views.search.home import home_blueprint, publicar_blueprint
+from views.car.car import car_blueprint
 from model.usuario import Usuario
 from model.viaje import Viaje
 
@@ -20,6 +21,7 @@ def create_app():
     aplicacion.register_blueprint(auth_blueprint, url_prefix='/auth')
     aplicacion.register_blueprint(home_blueprint, url_prefix='/home')
     aplicacion.register_blueprint(publicar_blueprint, url_prefix='/publicar')
+    aplicacion.register_blueprint(car_blueprint, url_prefix='/car')
 
     return aplicacion, lmanager, syrp
 
@@ -42,7 +44,7 @@ def logout():
 
 @lm.unauthorized_handler
 def unauthorized_handler():
-    flask.flash("Unauthorized")
+    flask.flash("Debes iniciar sesión para acceder a esta página", "error")
     return flask.redirect("/")
 
 

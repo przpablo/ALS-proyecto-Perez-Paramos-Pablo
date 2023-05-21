@@ -2,6 +2,7 @@
 import sirope
 import flask_login
 import werkzeug.security as safe
+from model.coche import Coche
 
 
 class Usuario(flask_login.UserMixin):
@@ -11,6 +12,7 @@ class Usuario(flask_login.UserMixin):
         self.__email = email
         self.__passwd = safe.generate_password_hash(passwd)
         self.__valoraciones = []
+        self.__coche = None
 
     @property
     def nombre(self):
@@ -35,6 +37,14 @@ class Usuario(flask_login.UserMixin):
     @property
     def email(self):
         return self.__email
+
+    @property
+    def coche(self) -> Coche:
+        return self.__coche
+
+    @coche.setter
+    def coche(self, coche: Coche):
+        self.__coche = coche
 
     def get_id(self):
         return self.email

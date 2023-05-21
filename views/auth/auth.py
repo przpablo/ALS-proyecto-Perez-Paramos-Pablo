@@ -22,7 +22,7 @@ def registro():
         tlf = request.form['phone']
         passwd = request.form['password']
 
-        if not nombre:
+        if not nombre or not nombre.isalpha():
             flask.flash("Nombre no puede estar vacío")
             return flask.redirect("/auth/registro")
         if not email:

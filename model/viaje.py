@@ -1,11 +1,11 @@
 # Viaje
 
 from model.usuario import Usuario
-from model.coche import Coche
+from datetime import date
 
 
 class Viaje:
-    def __init__(self, origen, destino, fecha, hora, tiempo, tarifa, plazas, conductor: Usuario, coche: Coche):
+    def __init__(self, origen, destino, fecha: date, hora, tiempo, tarifa, plazas, conductor: Usuario):
         self.__origen = origen
         self.__destino = destino
         self.__fecha = fecha
@@ -14,7 +14,6 @@ class Viaje:
         self.__tarifa = tarifa
         self.__plazas = plazas
         self.__condutor = conductor
-        self.__coche = coche
         self.__pasajeros = []
         self.__estado = False  # False = no realizado, True = realizado
 
@@ -25,14 +24,6 @@ class Viaje:
     @origen.setter
     def origen(self, origen):
         self.__origen = origen
-
-    @property
-    def coche(self):
-        return self.__coche
-
-    @coche.setter
-    def coche(self, coche):
-        self.__coche = coche
 
     @property
     def destino(self):
