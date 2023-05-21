@@ -13,7 +13,7 @@ class Viaje:
         self.__tiempo = tiempo
         self.__tarifa = tarifa
         self.__plazas = plazas
-        self.__condutor = conductor
+        self.__conductor = conductor
         self.__pasajeros = []
         self.__estado = False  # False = no realizado, True = realizado
 
@@ -83,7 +83,7 @@ class Viaje:
 
     @property
     def conductor(self):
-        return self.__condutor
+        return self.__conductor
 
     @property
     def pasajeros(self):

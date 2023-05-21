@@ -67,12 +67,7 @@ class Usuario(flask_login.UserMixin):
 
     @staticmethod
     def current_user():
-        usr = flask_login.current_user
-
-        if usr.is_anonymous:
-            flask_login.logout_user()
-        usr = None
-        return usr
+        return flask_login.current_user
 
     @staticmethod
     def find(s: sirope.Sirope, email: str) -> "Usuario":

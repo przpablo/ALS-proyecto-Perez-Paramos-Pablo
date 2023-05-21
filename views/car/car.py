@@ -3,6 +3,7 @@ import sirope
 from flask_login import login_required
 from model.coche import Coche
 from flask import render_template, request
+from model.usuario import Usuario
 
 
 def get_blprint():
@@ -38,7 +39,10 @@ def add_car():
             return flask.redirect("/car/addcar")
         else:
             car = Coche(marca, modelo, color, anno)
+            usuario = Usuario.current_user()
+            usuario.coche = car
             srp.save(car)
+            srp.save(usuario)
             return render_template('/home.html')
 
     return render_template('addcar.html')

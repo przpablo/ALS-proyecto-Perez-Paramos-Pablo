@@ -38,10 +38,6 @@
                             <label for="plazas" class="form-label">Plazas disponibles</label>
                             <input type="number" class="form-control" id="plazas" name="plazas" placeholder="Ingrese la cantidad de plazas disponibles">
                         </div>
-                        <div class="mb-3">
-                            <label for="coche" class="form-label">Coche</label>
-                            <input type="text" class="form-control" id="coche" name="coche" placeholder="Ingrese los datos del coche">
-                        </div>
                         <div id="dvErrores" style="color: red;background-color: white">
                             <ul>
                             {% for msg in get_flashed_messages()%}

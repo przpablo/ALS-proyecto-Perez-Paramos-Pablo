@@ -34,7 +34,6 @@ def publicar_route():
         tiempo = request.form['tiempo']
         tarifa = request.form['tarifa']
         plazas = request.form['plazas']
-        coche = request.form['coche']
 
         if not origen or not origen.isalpha():
             flask.flash("Formato origen no válido")
@@ -57,9 +56,6 @@ def publicar_route():
         if not plazas:
             flask.flash("Formato plazas no válido")
             return flask.redirect("/publicar/publicar")
-        if not coche:
-            flask.flash("El coche está vacío")
-            return flask.redirect("/publicar/publicar")
         else:
             viaje = Viaje(origen, destino, fecha, hora, tiempo, tarifa, plazas, Usuario.current_user())
             srp.save(viaje)
@@ -68,6 +64,8 @@ def publicar_route():
             datos = {
                 "lista_viajes": reversed(list(lista_viajes))
             }
-            return flask.redirect("/home/home", **datos)
+
+            flask.flash("Viaje publicado con éxito", "success")
+            return flask.redirect("/home/home")
 
     return render_template('publicar.html')
