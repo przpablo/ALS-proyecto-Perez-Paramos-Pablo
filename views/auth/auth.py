@@ -24,16 +24,16 @@ def registro():
 
         if not nombre:
             flask.flash("Nombre no puede estar vacío")
-            return flask.redirect("/registro")
-        elif not email:
+            return flask.redirect("/auth/registro")
+        if not email:
             flask.flash("Email no puede estar vacío")
-            return flask.redirect("/registro")
-        elif not tlf or len(tlf) != 9:
+            return flask.redirect("/auth/registro")
+        if not tlf or len(tlf) != 9 or not tlf.isdigit():
             flask.flash("Teléfono no es válido")
-            return flask.redirect("/registro")
-        elif not passwd:
+            return flask.redirect("/auth/registro")
+        if not passwd:
             flask.flash("Contraseña no puede estar vacía")
-            return flask.redirect("/registro")
+            return flask.redirect("/auth/registro")
         else:
             user = Usuario(nombre, email, tlf, passwd)
             srp.save(user)

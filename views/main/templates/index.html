@@ -23,6 +23,13 @@
                         </div>
                     </form>
                 </div>
+                <div id="dvErrores" style="color: red;background-color: white">
+                    <ul>
+                    {% for msg in get_flashed_messages()%}
+                        <li>{{ msg }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
                 <div class="card-footer text-center" style="background-color: #28a745; color: white;">
                     ¿No tienes una cuenta? <a href="{{ url_for('auth.registro') }}" class="text-white">Regístrate</a>
                 </div>

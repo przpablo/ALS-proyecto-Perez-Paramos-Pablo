@@ -5,7 +5,7 @@ import werkzeug.security as safe
 
 
 class Usuario(flask_login.UserMixin):
-    def __init__(self, nombre, telefono, email, passwd):
+    def __init__(self, nombre, email, telefono, passwd):
         self.__nombre = nombre
         self.__telefono = telefono
         self.__email = email
