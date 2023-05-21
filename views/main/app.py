@@ -14,8 +14,7 @@ def create_app():
     aplicacion = flask.Flask(__name__, instance_relative_config=True)
     syrp = sirope.Sirope()
 
-    # config_path = os.path.join(aplicacion.root_path, '..', '..', 'instance', 'config.json')
-    # aplicacion.config.from_json(config_path)
+    # aplicacion.config.from_json("config.json")
     lmanager.init_app(aplicacion)
     aplicacion.register_blueprint(auth_blueprint, url_prefix='/auth')
     aplicacion.register_blueprint(home_blueprint, url_prefix='/home')
@@ -42,6 +41,10 @@ def logout():
 def unauthorized_handler():
     flask.flash("Unauthorized")
     return flask.redirect("/")
+
+
+def guardar_usuario(user):
+    srp.save(user)
 
 
 # Ruta principal
