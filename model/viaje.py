@@ -16,6 +16,7 @@ class Viaje:
         self.__condutor = conductor
         self.__coche = coche
         self.__pasajeros = []
+        self.__estado = False  # False = no realizado, True = realizado
 
     @property
     def origen(self):
@@ -80,6 +81,14 @@ class Viaje:
     @plazas.setter
     def plazas(self, plazas):
         self.__plazas = plazas
+
+    @property
+    def estado(self):
+        return self.__estado
+
+    @estado.setter
+    def estado(self, value):
+        self.__estado = value
 
     @property
     def conductor(self):

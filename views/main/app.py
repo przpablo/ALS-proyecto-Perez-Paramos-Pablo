@@ -33,6 +33,7 @@ def user_loader(email):
 
 
 @app.route('/logout')
+@flask_login.login_required
 def logout():
     flask_login.logout_user()
     flask.flash("User logged out")
