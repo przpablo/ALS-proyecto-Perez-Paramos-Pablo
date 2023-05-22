@@ -44,7 +44,16 @@ class Usuario(flask_login.UserMixin):
 
     @coche.setter
     def coche(self, coche: Coche):
-        self.__coche = coche
+        self.__coche = coche.to_dict()
+
+    def to_dict(self):
+        return {
+            'nombre': self.__nombre,
+            'email': self.__email,
+            'telefono': self.__telefono,
+            'valoraciones': self.__valoraciones,
+            'coche': self.__coche if self.__coche else None
+        }
 
     def get_id(self):
         return self.email

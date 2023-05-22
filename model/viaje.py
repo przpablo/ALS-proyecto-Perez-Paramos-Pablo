@@ -13,7 +13,7 @@ class Viaje:
         self.__tiempo = tiempo
         self.__tarifa = tarifa
         self.__plazas = plazas
-        self.__conductor = conductor
+        self.__conductor = conductor.to_dict()
         self.__pasajeros = []
         self.__estado = False  # False = no realizado, True = realizado
 

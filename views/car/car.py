@@ -1,3 +1,4 @@
+import json
 import flask
 import sirope
 from flask_login import login_required
@@ -28,7 +29,7 @@ def add_car():
         if not marca or not marca.isalpha():
             flask.flash("El formato de la marca no es válido")
             return flask.redirect("/car/addcar")
-        if not modelo or not modelo.isalpha():
+        if not modelo:
             flask.flash("El formato del modelo no es válido")
             return flask.redirect("/car/addcar")
         if not color or not color.isalpha():
@@ -39,10 +40,12 @@ def add_car():
             return flask.redirect("/car/addcar")
         else:
             car = Coche(marca, modelo, color, anno)
+            # usuario = Usuario.find(srp, Usuario.current_user().email)
             usuario = Usuario.current_user()
+            # srp.delete(usuario)
             usuario.coche = car
             srp.save(car)
             srp.save(usuario)
-            return render_template('/home.html')
+            return flask.redirect("/home/home")
 
     return render_template('addcar.html')

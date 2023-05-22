@@ -39,5 +39,13 @@ class Coche:
     def anno(self, anno):
         self.__anno = anno
 
+    def to_dict(self):
+        return {
+            "marca": self.marca,
+            "modelo": self.modelo,
+            "color": self.color,
+            "anno": self.anno
+        }
+
     def __str__(self):
         return f"{self.marca}, {self.modelo} ({self.anno}): {self.color}"
