@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="accordion" id="viajesAccordion">
-        {% if lista_viajes|list %}
+        {% if lista_viajes %}
             {% for viaje in lista_viajes %}
             <div class="card">
                 <div class="card-header" id="heading{{ loop.index }}">
@@ -21,7 +21,7 @@
                             <li>Tiempo: {{ viaje.tiempo }} minutos</li>
                             <li>Tarifa: {{ viaje.tarifa }}€</li>
                             <li>Plazas disponibles: {{ viaje.plazas }}</li>
-                            <li>Conductor: {{ viaje.conductor }}</li>
+                            <li>Conductor: {{ viaje.conductor.nombre }}</li>
                         </ul>
                     </div>
                 </div>

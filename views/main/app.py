@@ -1,13 +1,12 @@
 import flask
 import sirope
 import flask_login
-from flask import render_template, request
+from flask import render_template, request, url_for
 from flask_login import login_manager
 from views.auth.auth import auth_blueprint
 from views.search.home import home_blueprint, publicar_blueprint
 from views.car.car import car_blueprint
 from model.usuario import Usuario
-from model.viaje import Viaje
 
 
 def create_app():
@@ -72,11 +71,7 @@ def index():
 
             flask_login.login_user(user)
 
-            lista_viajes = srp.load_all(Viaje)
-            datos = {
-                "lista_viajes": reversed(list(lista_viajes))
-            }
-            return render_template('home.html', **datos)
+            return flask.redirect(url_for('home.home_route'))
 
     return render_template('index.html')
 

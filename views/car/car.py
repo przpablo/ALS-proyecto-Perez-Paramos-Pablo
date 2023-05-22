@@ -1,9 +1,8 @@
-import json
 import flask
 import sirope
 from flask_login import login_required
 from model.coche import Coche
-from flask import render_template, request
+from flask import render_template, request, url_for
 from model.usuario import Usuario
 
 
@@ -40,12 +39,10 @@ def add_car():
             return flask.redirect("/car/addcar")
         else:
             car = Coche(marca, modelo, color, anno)
-            # usuario = Usuario.find(srp, Usuario.current_user().email)
             usuario = Usuario.current_user()
-            # srp.delete(usuario)
             usuario.coche = car
             srp.save(car)
             srp.save(usuario)
-            return flask.redirect("/home/home")
+            return flask.redirect(url_for('home.home_route'))
 
     return render_template('addcar.html')

@@ -1,5 +1,5 @@
 import flask
-from flask import render_template, request
+from flask import render_template, request, url_for
 from flask_login import login_required
 from model.viaje import Viaje
 from datetime import date, datetime
@@ -20,7 +20,14 @@ home_blueprint, publicar_blueprint, srp = get_blprint()
 @home_blueprint.route('/home', methods=['GET'])
 @login_required
 def home_route():
-    return render_template('home.html')
+    lista_viajes = srp.load_all(Viaje)
+    datos = {
+        "lista_viajes": reversed(list(lista_viajes))
+    }
+
+    flask.flash("Viaje publicado con éxito", "success")
+    # return flask.redirect("/home/home")
+    return render_template('home.html', **datos)
 
 
 @publicar_blueprint.route('/publicar', methods=['GET', 'POST'])
@@ -60,12 +67,7 @@ def publicar_route():
             viaje = Viaje(origen, destino, fecha, hora, tiempo, tarifa, plazas, Usuario.current_user())
             srp.save(viaje)
 
-            lista_viajes = srp.load_all(Viaje)
-            datos = {
-                "lista_viajes": reversed(list(lista_viajes))
-            }
-
             flask.flash("Viaje publicado con éxito", "success")
-            return flask.redirect("/home/home")
+            return flask.redirect(url_for('home.home_route'))
 
     return render_template('publicar.html')
