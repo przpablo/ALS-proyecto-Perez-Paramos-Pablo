@@ -17,7 +17,7 @@ def get_blprint():
 home_blueprint, publicar_blueprint, srp = get_blprint()
 
 
-@home_blueprint.route('/home', methods=['GET'])
+@home_blueprint.route('/', methods=['GET'])
 @login_required
 def home_route():
     lista_viajes = srp.load_all(Viaje)
@@ -64,7 +64,7 @@ def publicar_route():
             flask.flash("Formato plazas no válido")
             return flask.redirect("/publicar/publicar")
         else:
-            viaje = Viaje(origen, destino, fecha, hora, tiempo, tarifa, plazas, Usuario.current_user())
+            viaje = Viaje(origen, destino, fecha, hora, int(tiempo), int(tarifa), int(plazas), Usuario.current_user())
             srp.save(viaje)
 
             flask.flash("Viaje publicado con éxito", "success")

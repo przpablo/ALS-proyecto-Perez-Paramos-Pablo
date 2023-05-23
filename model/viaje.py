@@ -5,7 +5,7 @@ from datetime import date
 
 
 class Viaje:
-    def __init__(self, origen, destino, fecha: date, hora, tiempo, tarifa, plazas, conductor: Usuario):
+    def __init__(self, origen, destino, fecha: date, hora, tiempo: int, tarifa: int, plazas: int, conductor: Usuario):
         self.__id = str(uuid.uuid4())
         self.__origen = origen
         self.__destino = destino
@@ -71,11 +71,11 @@ class Viaje:
         self.__tarifa = tarifa
 
     @property
-    def plazas(self):
-        return self.__plazas
+    def plazas(self) -> int:
+        return int(self.__plazas)
 
     @plazas.setter
-    def plazas(self, plazas):
+    def plazas(self, plazas: int):
         self.__plazas = plazas
 
     @property
@@ -89,6 +89,10 @@ class Viaje:
     @property
     def conductor(self):
         return self.__conductor
+
+    @conductor.setter
+    def conductor(self, conductor: Usuario):
+        self.__conductor = conductor.to_dict()
 
     @property
     def pasajeros(self):
@@ -114,6 +118,21 @@ class Viaje:
             if viaje.id == viaje_id:
                 return viaje
         return None
+
+    def to_dict(self):
+        return {
+            'id': self.__id,
+            'origen': self.__origen,
+            'destino': self.__destino,
+            'fecha': str(self.__fecha),
+            'hora': self.__hora,
+            'tiempo': self.__tiempo,
+            'tarifa': self.__tarifa,
+            'plazas': self.__plazas,
+            'conductor': self.conductor,
+            'pasajeros': self.__pasajeros,
+            'estado': self.__estado
+        }
 
     def __str__(self):
         return f"{self.origen} - {self.destino} ({self.fecha} {self.hora}): {self.tarifa}€ por: {self.conductor.nombre}"
