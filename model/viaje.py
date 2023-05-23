@@ -1,11 +1,12 @@
 # Viaje
-
+import uuid
 from model.usuario import Usuario
 from datetime import date
 
 
 class Viaje:
     def __init__(self, origen, destino, fecha: date, hora, tiempo, tarifa, plazas, conductor: Usuario):
+        self.__id = str(uuid.uuid4())
         self.__origen = origen
         self.__destino = destino
         self.__fecha = fecha
@@ -16,6 +17,10 @@ class Viaje:
         self.__conductor = conductor.to_dict()
         self.__pasajeros = []
         self.__estado = False  # False = no realizado, True = realizado
+
+    @property
+    def id(self):
+        return self.__id
 
     @property
     def origen(self):
@@ -102,6 +107,13 @@ class Viaje:
             self.__plazas -= len(pasajeros)
         else:
             raise Exception("No hay plazas disponibles")
+
+    @staticmethod
+    def obtener_viaje_por_id(viajes, viaje_id):
+        for viaje in viajes:
+            if viaje.id == viaje_id:
+                return viaje
+        return None
 
     def __str__(self):
         return f"{self.origen} - {self.destino} ({self.fecha} {self.hora}): {self.tarifa}€ por: {self.conductor.nombre}"

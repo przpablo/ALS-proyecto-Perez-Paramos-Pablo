@@ -6,6 +6,7 @@ from flask_login import login_manager
 from views.auth.auth import auth_blueprint
 from views.search.home import home_blueprint, publicar_blueprint
 from views.car.car import car_blueprint
+from views.reservar.reservar import reservar_blueprint
 from model.usuario import Usuario
 
 
@@ -21,6 +22,7 @@ def create_app():
     aplicacion.register_blueprint(home_blueprint, url_prefix='/home')
     aplicacion.register_blueprint(publicar_blueprint, url_prefix='/publicar')
     aplicacion.register_blueprint(car_blueprint, url_prefix='/car')
+    aplicacion.register_blueprint(reservar_blueprint, url_prefix='/reservar')
 
     return aplicacion, lmanager, syrp
 
