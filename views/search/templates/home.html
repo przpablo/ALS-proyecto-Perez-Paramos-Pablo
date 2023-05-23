@@ -1,35 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="accordion" id="viajesAccordion">
         {% if lista_viajes %}
             {% for viaje in lista_viajes %}
-            <div class="card">
-                <div class="card-header" id="heading{{ loop.index }}">
+            <div class="card col-4">
+                <div class="card-header bg-success" id="heading{{ loop.index }}">
                     <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}">
+                        <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}">
                             {{ viaje.origen }} - {{ viaje.destino }}
                         </button>
                     </h2>
                 </div>
                 <div id="collapse{{ loop.index }}" class="collapse" data-parent="#viajesAccordion">
-                    <div class="card-body">
-                        <ul>
-                            <li>Fecha: {{ viaje.fecha }}</li>
-                            <li>Hora: {{ viaje.hora }}</li>
-                            <li>Tiempo: {{ viaje.tiempo }} minutos</li>
-                            <li>Tarifa: {{ viaje.tarifa }}€</li>
-                            <li>Plazas disponibles: {{ viaje.plazas }}</li>
-                            <li>Conductor: {{ viaje.conductor.nombre }}</li>
+                    <div class="card-body bg-light">
+                        <ul class="custom-list">
+                            <li><strong>Fecha:</strong> {{ viaje.fecha }}</li>
+                            <li><strong>Hora:</strong> {{ viaje.hora }}</li>
+                            <li><strong>Tiempo:</strong> {{ viaje.tiempo }} minutos</li>
+                            <li><strong>Tarifa:</strong> {{ viaje.tarifa }}€</li>
+                            <li><strong>Plazas disponibles:</strong> {{ viaje.plazas }}</li>
+                            <li><strong>Conductor:</strong> {{ viaje.conductor.nombre }} {{ viaje.conductor.calcular_valoracion }}</li>
+                            <li><strong>Coche:</strong> {{ viaje.conductor.coche.marca }} {{ viaje.conductor.coche.marca }} ({{ viaje.conductor.coche.anno }}): {{ viaje.conductor.coche.color }}</li>
                         </ul>
                     </div>
                 </div>
             </div>
             {% endfor %}
         {% else %}
-            <p>No hay viajes disponibles</p>
+            <p class="custom-no-viajes">No hay viajes disponibles</p>
         {% endif %}
     </div>
 </div>
+
+<style>
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    .bg-light {
+        background-color: #ffffff !important;
+    }
+
+    .custom-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .custom-list li {
+        margin-bottom: 5px;
+    }
+
+    .custom-no-viajes {
+        color: #dc3545;
+        font-style: italic;
+    }
+
+    /* Estilo adicional para ajustar el espaciado */
+    .container-fluid {
+        margin-right: 0;
+        margin-left: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+</style>
 {% endblock %}

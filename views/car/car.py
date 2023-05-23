@@ -52,7 +52,7 @@ def add_car():
 
     if request.method == 'POST':
         if not comprobaciones():
-            return flask.redirect("/car/addcar")
+            return flask.redirect("/car/car")
         else:
             return flask.redirect(url_for('home.home_route'))
 

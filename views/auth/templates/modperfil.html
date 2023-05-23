@@ -6,25 +6,25 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-custom" style="background-color: #28a745;">
-                    <h3 class="card-title text-white">Registro de Coche</h3>
+                    <h3 class="card-title text-white">Modificar perfil</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST">
                         <div class="mb-3">
-                            <label for="marca" class="form-label">Marca</label>
-                            <input type="text" class="form-control" id="marca" name="marca" placeholder="Ingrese la marca del coche">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese su nombre" value="{{ usuario.nombre }}">
                         </div>
                         <div class="mb-3">
-                            <label for="modelo" class="form-label">Modelo</label>
-                            <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ingrese el modelo del coche">
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Ingrese su teléfono" value="{{ usuario.telefono }}">
                         </div>
                         <div class="mb-3">
-                            <label for="color" class="form-label">Color</label>
-                            <input type="text" class="form-control" id="color" name="color" placeholder="Ingrese el color del coche">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña">
                         </div>
                         <div class="mb-3">
-                            <label for="anno" class="form-label">Año</label>
-                            <input type="number" class="form-control" id="anno" name="anno" placeholder="Ingrese el año del coche">
+                            <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Ingrese nuevamente su contraseña">
                         </div>
                         <div id="dvErrores" style="color: red;background-color: white">
                             <ul>
@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success btn-registrarse">Añadir coche</button>
+                            <button type="submit" class="btn btn-success btn-registrarse">Guardar cambios</button>
                         </div>
                     </form>
                 </div>
