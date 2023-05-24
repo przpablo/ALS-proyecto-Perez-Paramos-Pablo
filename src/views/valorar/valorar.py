@@ -34,7 +34,12 @@ def misviajes_route():
     return render_template('misviajes.html', **datos)
 
 
-@valorar_blueprint.route('/viaje', methods=['GET'])
+@valorar_blueprint.route('/viaje', methods=['GET', 'POST'])
 @login_required
 def valorar_route():
-    pass
+    if request.method == 'POST':
+        viaje_id = request.form.get('viaje_id')
+        viaje = Viaje.obtener_viaje_por_id(srp.load_all(Viaje), viaje_id)
+        return render_template('valorar.html', viaje=viaje)
+
+    return flask.redirect(url_for('home.home_route'))
