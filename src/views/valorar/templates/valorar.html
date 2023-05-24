@@ -31,6 +31,13 @@
                         </div>
                     </form>
                 </div>
+                <div id="dvErrores" style="color: red;background-color: white">
+                    <ul>
+                    {% for msg in get_flashed_messages()%}
+                        <li>{{ msg }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
                 <div class="card-footer text-center bg-custom text-white" style="background-color: #28a745;">
                     <a href="{{ url_for('home.home_route') }}" class="text-white">Volver a ver viajes</a>
                 </div>

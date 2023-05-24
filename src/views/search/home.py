@@ -83,7 +83,6 @@ def publicar_route():
             viaje = Viaje(origen, destino, fecha, hora, int(tiempo), int(tarifa), int(plazas), Usuario.current_user())
             srp.save(viaje)
 
-            flask.flash("Viaje publicado con éxito", "success")
             return flask.redirect(url_for('home.home_route'))
 
     return render_template('publicar.html')

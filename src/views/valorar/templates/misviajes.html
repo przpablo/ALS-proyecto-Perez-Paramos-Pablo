@@ -35,6 +35,13 @@
                                 <p class="custom-no-viajes">El viaje aún no ha comenzado</p>
                             {% endif %}
                         </div>
+                        <div id="dvErrores" style="color: red;background-color: white">
+                            <ul>
+                            {% for msg in get_flashed_messages()%}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
