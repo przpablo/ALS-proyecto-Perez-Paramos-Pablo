@@ -56,13 +56,13 @@ def mod_perfil():
 
         if not modnombre or not modnombre.isalpha():
             flask.flash("Nombre no puede estar vacío")
-            return flask.redirect("/auth/registro")
+            return flask.redirect(url_for('auth.mod_perfil'))
         if not tlf or len(tlf) != 9 or not tlf.isdigit():
             flask.flash("Teléfono no es válido")
-            return flask.redirect("/auth/registro")
+            return flask.redirect(url_for('auth.mod_perfil'))
         if not passwd:
             flask.flash("Contraseña no puede estar vacía")
-            return flask.redirect("/auth/registro")
+            return flask.redirect(url_for('auth.mod_perfil'))
         if passwd != confirm_password or not confirm_password:
             flask.flash("Las contraseñas no coinciden")
             return flask.redirect(url_for('auth.mod_perfil'))
