@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center">Mis viajes</h1>
+    <div class="row">
+        {% if lista_viajes %}
+            {% for viaje in lista_viajes %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}">
+                                {{ viaje.origen }} - {{ viaje.destino }}
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapse{{ loop.index }}" class="collapse">
+                        <div class="card-body bg-light">
+                            <ul class="custom-list">
+                                <li><strong>Fecha:</strong> {{ viaje.fecha }}</li>
+                                <li><strong>Hora:</strong> {{ viaje.hora }}</li>
+                                <li><strong>Tiempo:</strong> {{ viaje.tiempo }} minutos</li>
+                                <li><strong>Tarifa:</strong> {{ viaje.tarifa }}€</li>
+                                <li><strong>Plazas disponibles:</strong> {{ viaje.plazas }}</li>
+                                <li><strong>Conductor:</strong> {{ viaje.conductor.nombre }} {{ viaje.conductor.calcular_valoracion }}</li>
+                                <li><strong>Coche:</strong> {{ viaje.conductor.coche.marca }} {{ viaje.conductor.coche.marca }} ({{ viaje.conductor.coche.anno }}): {{ viaje.conductor.coche.color }}</li>
+                            </ul>
+                            <form action="{{ url_for('valorar.valorar_route') }}" method="POST">
+                                <input type="hidden" name="viaje_id" value="{{ viaje.id }}">
+                                <button class="btn btn-success btn-valorar" type="submit">Valorar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <p class="custom-no-viajes">No has reservado ningun viaje</p>
+            {% endfor %}
+        {% else %}
+            <p class="custom-no-viajes">No has reservado ningun viaje</p>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    .bg-light {
+        background-color: #ffffff !important;
+    }
+
+    .custom-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .custom-list li {
+        margin-bottom: 5px;
+    }
+
+    .custom-no-viajes {
+        color: #dc3545;
+        font-style: italic;
+    }
+
+    .btn-reservar {
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .btn-valorar {
+        margin-top: 10px;
+        width: 100%;
+    }
+</style>
+{% endblock %}

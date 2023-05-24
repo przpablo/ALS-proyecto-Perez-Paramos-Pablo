@@ -7,6 +7,7 @@ from views.auth.auth import auth_blueprint
 from views.search.home import home_blueprint, publicar_blueprint
 from views.car.car import car_blueprint
 from views.reservar.reservar import reservar_blueprint
+from views.valorar.valorar import valorar_blueprint
 from model.usuario import Usuario
 
 
@@ -23,6 +24,7 @@ def create_app():
     aplicacion.register_blueprint(publicar_blueprint, url_prefix='/publicar')
     aplicacion.register_blueprint(car_blueprint, url_prefix='/car')
     aplicacion.register_blueprint(reservar_blueprint, url_prefix='/reservar')
+    aplicacion.register_blueprint(valorar_blueprint, url_prefix='/valorar')
 
     return aplicacion, lmanager, syrp
 
