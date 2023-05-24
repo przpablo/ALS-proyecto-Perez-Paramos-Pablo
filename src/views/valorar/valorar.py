@@ -33,6 +33,7 @@ def misviajes_route():
 
     return render_template('misviajes.html', **datos)
 
+
 @valorar_blueprint.route('/viaje', methods=['GET'])
 @login_required
 def valorar_route():

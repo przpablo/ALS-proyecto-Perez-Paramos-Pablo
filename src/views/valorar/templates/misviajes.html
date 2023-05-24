@@ -26,10 +26,14 @@
                                 <li><strong>Conductor:</strong> {{ viaje.conductor.nombre }} {{ viaje.conductor.calcular_valoracion }}</li>
                                 <li><strong>Coche:</strong> {{ viaje.conductor.coche.marca }} {{ viaje.conductor.coche.marca }} ({{ viaje.conductor.coche.anno }}): {{ viaje.conductor.coche.color }}</li>
                             </ul>
+                            {% if viaje.estado %}
                             <form action="{{ url_for('valorar.valorar_route') }}" method="POST">
                                 <input type="hidden" name="viaje_id" value="{{ viaje.id }}">
                                 <button class="btn btn-success btn-valorar" type="submit">Valorar</button>
                             </form>
+                            {% else %}
+                                <p class="custom-no-viajes">El viaje aún no ha comenzado</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
