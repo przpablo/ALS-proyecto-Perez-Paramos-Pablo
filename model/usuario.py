@@ -46,10 +46,6 @@ class Usuario(flask_login.UserMixin):
     def coche(self, coche: Coche):
         self.__coche = coche.to_dict()
 
-    @staticmethod
-    def __json_from_obj(self, obj):
-        return obj.to_dict()
-
     def to_dict(self):
         return {
             'nombre': self.__nombre,

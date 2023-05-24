@@ -87,7 +87,7 @@ class Viaje:
         self.__estado = value
 
     @property
-    def conductor(self):
+    def conductor(self) -> Usuario:
         return self.__conductor
 
     @conductor.setter

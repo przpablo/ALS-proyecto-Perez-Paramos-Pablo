@@ -42,7 +42,10 @@ def actualizar_viaje():
         if not viaje:
             flask.flash("No existe el viaje")
             return flask.redirect(url_for('home.home_route'))
-        if usuario == viaje.conductor:
+        if viaje.plazas <= 0:
+            flask.flash("No quedan plazas")
+            return flask.redirect(url_for('home.home_route'))
+        if usuario.email == viaje.conductor['email']:
             flask.flash("No puedes reservar tu propio viaje")
             return flask.redirect(url_for('home.home_route'))
         else:
