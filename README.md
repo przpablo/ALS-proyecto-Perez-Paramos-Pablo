@@ -56,7 +56,7 @@ Sigue estos pasos para realizar el despliegue de la aplicación:
 4. En la terminal del sistema operativo, navega hasta la carpeta raíz del proyecto.
 5. Luego, ejecuta el siguiente comando para ingresar a la carpeta principal del proyecto:
 ```bash
->cd .\views\main\ 
+>cd .\src\views\main\ 
 ```
 
 6. Por último, ejecuta el siguiente comando para iniciar la aplicación:
