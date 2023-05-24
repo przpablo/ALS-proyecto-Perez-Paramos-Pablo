@@ -51,6 +51,6 @@ def actualizar_viaje():
         else:
             viaje.add_pasajero(usuario.to_dict())
             srp.save(viaje)
-            return flask.redirect(url_for('home.home_route'))
+            return flask.redirect(url_for('valorar.misviajes_route'))
 
     return render_template('reserva.html', viaje=viaje)

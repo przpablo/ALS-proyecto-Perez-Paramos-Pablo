@@ -22,8 +22,12 @@
                                 <li><strong>Tiempo:</strong> {{ viaje.tiempo }} minutos</li>
                                 <li><strong>Tarifa:</strong> {{ viaje.tarifa }}€</li>
                                 <li><strong>Plazas disponibles:</strong> {{ viaje.plazas }}</li>
-                                <li><strong>Conductor:</strong> {{ viaje.conductor.nombre }} {{ viaje.conductor.calcular_valoracion }}</li>
-                                <li><strong>Coche:</strong> {{ viaje.conductor.coche.marca }} {{ viaje.conductor.coche.marca }} ({{ viaje.conductor.coche.anno }}): {{ viaje.conductor.coche.color }}</li>
+                                <li><strong>Conductor:</strong> {{ viaje.conductor.nombre }} ({{ viaje.conductor.valoracion_media }})</li>
+                                {% if viaje.conductor.coche %}
+                                <li><strong>Coche:</strong> {{ viaje.conductor.coche.marca }} {{ viaje.conductor.coche.modelo }} ({{ viaje.conductor.coche.anno }}): {{ viaje.conductor.coche.color }}</li>
+                                {% else %}
+                                <li><strong>Coche:</strong> No tiene coche asignado</li>
+                                {% endif %}
                             </ul>
                             <form action="{{ url_for('reservar.reservar_route') }}" method="POST">
                                 <input type="hidden" name="viaje_id" value="{{ viaje.id }}">

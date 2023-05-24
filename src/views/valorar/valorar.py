@@ -37,9 +37,27 @@ def misviajes_route():
 @valorar_blueprint.route('/viaje', methods=['GET', 'POST'])
 @login_required
 def valorar_route():
+    viaje_id = request.form.get('viaje_id')
+    viaje = Viaje.obtener_viaje_por_id(srp.load_all(Viaje), viaje_id)
+
     if request.method == 'POST':
-        viaje_id = request.form.get('viaje_id')
-        viaje = Viaje.obtener_viaje_por_id(srp.load_all(Viaje), viaje_id)
+        valoracion = request.form.get('rating')
+
+        if not valoracion:
+            flask.flash("Debes introducir una valoración")
+            return render_template('valorar.html', viaje=viaje)
+        else:
+            # viaje.conductor.add_valoracion(valoracion)
+
+            usuario = Usuario.find(srp, viaje.conductor['email'])
+            usuario.add_valoracion(valoracion)
+
+            srp.save(usuario)
+            viaje.conductor = usuario
+            srp.save(viaje)
+            flask.flash("Valoración enviada")
+            return flask.redirect(url_for('home.home_route'))
+
         return render_template('valorar.html', viaje=viaje)
 
     return flask.redirect(url_for('home.home_route'))

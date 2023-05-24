@@ -20,7 +20,23 @@ home_blueprint, publicar_blueprint, srp = get_blprint()
 @home_blueprint.route('/', methods=['GET'])
 @login_required
 def home_route():
-    lista_viajes = srp.load_all(Viaje)
+    lista = srp.load_all(Viaje)
+
+    fecha = datetime.now().date()
+    hora = datetime.now().time()
+    lista_viajes = []
+
+    for viaje in lista:
+        if datetime.strptime(viaje.fecha, "%Y-%m-%d").date() >= fecha:
+            if datetime.strptime(viaje.hora, "%H:%M").time() >= hora:
+                lista_viajes.append(viaje)
+            else:
+                viaje.estado = True
+                srp.save(viaje)
+        else:
+            viaje.estado = True
+            srp.save(viaje)
+
     datos = {
         "lista_viajes": reversed(list(lista_viajes))
     }

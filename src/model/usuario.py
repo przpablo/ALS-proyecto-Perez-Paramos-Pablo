@@ -12,6 +12,7 @@ class Usuario(flask_login.UserMixin):
         self.__email = email
         self.__passwd = safe.generate_password_hash(passwd)
         self.__valoraciones = []
+        self.__valoracionmedia = 0.0
         self.__coche = None
 
     @property
@@ -46,12 +47,21 @@ class Usuario(flask_login.UserMixin):
     def coche(self, coche: Coche):
         self.__coche = coche.to_dict()
 
+    @property
+    def valoracionmedia(self) -> float:
+        return self.__valoracionmedia
+
+    @valoracionmedia.setter
+    def valoracionmedia(self, valoracionmedia: float):
+        self.__valoracionmedia = valoracionmedia
+
     def to_dict(self):
         return {
             'nombre': self.__nombre,
             'email': self.__email,
             'telefono': self.__telefono,
             'valoraciones': self.__valoraciones,
+            'valoracion_media': self.__valoracionmedia,
             'coche': self.__coche if self.__coche else None
         }
 
@@ -63,6 +73,7 @@ class Usuario(flask_login.UserMixin):
 
     def add_valoracion(self, valoracion: int):
         self.__valoraciones.append(valoracion)
+        self.valoracion_media = self.calcular_valoracion()
 
     def calcular_valoracion(self):
         toret = 0.0
@@ -70,7 +81,7 @@ class Usuario(flask_login.UserMixin):
             toret = 0.0
         else:
             for valoracion in self.valoraciones:
-                toret += valoracion
+                toret += float(valoracion)
             toret /= len(self.valoraciones)
         return toret
 

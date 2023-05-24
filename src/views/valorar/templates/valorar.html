@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
@@ -10,20 +12,19 @@
                 </div>
                 <div class="card-body">
                     <form method="POST">
-                        <div class="mb-3">
-                            <label for="origen" class="form-label">Origen</label>
-                            <input type="text" class="form-control" id="origen" name="origen" placeholder="Ingrese el origen">
+                        <input type="hidden" name="viaje_id" value="{{ viaje.id }}">
+                        <div class="text-center">
+                            <h1>Valorar a: {{ viaje.conductor.nombre }}</h1>
                         </div>
-                        <div class="mb-3">
-                            <label for="destino" class="form-label">Destino</label>
-                            <input type="text" class="form-control" id="destino" name="destino" placeholder="Ingrese el destino">
-                        </div>
-                        <div id="dvErrores" style="color: red;background-color: white">
-                            <ul>
-                            {% for msg in get_flashed_messages()%}
-                                <li>{{ msg }}</li>
-                            {% endfor %}
-                            </ul>
+                        <div class="mb-3 text-center">
+                            <label for="rating" class="form-label">Valoración:</label>
+                            <select class="form-select" id="rating" name="rating">
+                                <option value="5">5 - Excelente</option>
+                                <option value="4">4 - Muy bueno</option>
+                                <option value="3">3 - Bueno</option>
+                                <option value="2">2 - Regular</option>
+                                <option value="1">1 - Malo</option>
+                            </select>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-success btn-registrarse">Valorar viaje</button>

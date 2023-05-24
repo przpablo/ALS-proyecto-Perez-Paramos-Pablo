@@ -16,7 +16,7 @@ class Viaje:
         self.__plazas = plazas
         self.__conductor = conductor.to_dict()
         self.__pasajeros = []
-        self.__estado = True  # False = no realizado, True = realizado
+        self.__estado = False  # False = no realizado, True = realizado
 
     @property
     def id(self):
